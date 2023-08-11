@@ -16,8 +16,9 @@
 
     <p id="result"></p>
     
-    <script> 
+    <script>
         function showResult(elem) {
+            document.getElementById("result").innerHTML = "";
             const year = elem.getFullYear()
             const month = elem.getMonth() 
             const day = elem.getDate()
