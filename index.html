@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working Saturdays</title>
+</head>
+<body>
+    <label for="startdate">Enter first working saturday: </label>
+    <input type="date" id="startdate">
+    <br>
+    <label for="weekrange">For how many weeks: </label>
+    <input type="number" id="weekrange">
+    <br>
+    <button onclick="showResult(document.getElementById('startdate').valueAsDate)">Show</button>
+
+    <p id="result"></p>
+    
+    <script> 
+        function showResult(elem) {
+            const year = elem.getFullYear()
+            const month = elem.getMonth() 
+            const day = elem.getDate()
+            const weekrange = document.getElementById("weekrange").value
+            
+            const fixed = new Date(year, month, day)
+            
+            const working = []
+
+            for (let i = 0; i < weekrange; i = i + 2) {
+                const startdate = new Date(fixed)
+                startdate.setDate(elem.getDate() + (7 * i))
+                working.push(new Date(startdate).toDateString())
+                
+            }
+
+            j = 0
+            while (j < working.length) {
+                const br = document.createElement("br");
+                const node = document.createTextNode(working[j]);
+                document.getElementById("result").appendChild(node)
+                document.getElementById("result").appendChild(br)
+
+                j++;
+            }
+            
+        }
+    </script>
+</body>
+</html>
