@@ -26,6 +26,14 @@
         I'm finding those Saturdays for you... 🐇
     </div>
     
+    <div id="calendar-container">
+        <div id="month-selector">
+            <button onclick="changeMonth(-1)">Previous Month</button>
+            <span id="current-month"></span>
+            <button onclick="changeMonth(1)">Next Month</button>
+        </div>
+        <div id="calendar"></div>
+    </div>
     
     <script>
         function showResult() {
@@ -72,6 +80,81 @@
                 resultContainer.textContent = "No future working Saturdays found.";
             }
         }
+
+        const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const today = new Date();
+
+        let currentMonth = today.getMonth();
+        let currentYear = today.getFullYear();
+
+        function generateCalendar() {
+            const calendarContainer = document.getElementById('calendar');
+            calendarContainer.innerHTML = '';
+
+            // Set the current month in the header
+            document.getElementById('current-month').textContent = `${new Date(currentYear, currentMonth).toLocaleString('en-GB', { month: 'long', year: 'numeric' })}`;
+
+            // Generate header row with days of the week
+            const headerRow = document.createElement('div');
+            headerRow.classList.add('day');
+            daysOfWeek.forEach(day => {
+                const cell = document.createElement('div');
+                cell.textContent = day;
+                calendarContainer.appendChild(cell);
+            });
+
+            // Generate days for the month
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+            const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
+            // console.log(daysOfWeek[firstDayOfMonth.getDay()]);
+            // console.log(lastDayOfMonth);
+            const daysInMonth = lastDayOfMonth.getDate();
+
+            emptyDays = daysOfWeek.indexOf(daysOfWeek[firstDayOfMonth.getDay()]) - 1;
+            console.log(emptyDays);
+            for (let i = 0; i < emptyDays; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('day');
+                cell.textContent = "";
+
+                cell.addEventListener('click', () => alert(`Clicked on ${date.toDateString()}`));
+
+                calendarContainer.appendChild(cell);
+            }
+            for (let i = 1; i <= daysInMonth; i++) {
+                const date = new Date(currentYear, currentMonth, i);
+                const dayOfWeek = date.getDay();
+
+                const cell = document.createElement('div');
+                cell.classList.add('day');
+                cell.textContent = i;
+                
+                // 0 - Monday, 6 - Sunday
+                if (dayOfWeek === 6) {
+                    // Highlight every second Friday as a working day
+                    cell.classList.add('working-day');
+                }
+
+                cell.addEventListener('click', () => alert(`Clicked on ${date.toDateString()}`));
+
+                calendarContainer.appendChild(cell);
+            }
+        }
+
+        function changeMonth(delta) {
+            currentMonth += delta;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar();
+        }
+
+        // Initial calendar generation
+        generateCalendar();
     </script>
 </body>
 </html>
