@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Working Saturdays</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <label for="startdate">Enter first working saturday: </label>
-    <input type="date" id="startdate">
-    <br>
-    <label for="weekrange">For how many weeks: </label>
-    <input type="number" id="weekrange">
-    <br>
-    <button onclick="showResult(document.getElementById('startdate').valueAsDate)">Show</button>
+    <h1>Working Saturdays Calculator</h1>
+    <div id="form-container">
+        <label for="startdate">Enter first working saturday: </label>
+        <input type="date" id="startdate">
+        <br>
+        <label for="weekrange">For how many weeks: </label>
+        <input type="number" id="weekrange">
+        <br>
+        <button onclick="showResult(document.getElementById('startdate').valueAsDate)">Show</button>
     </div>
 
     <div id="result" style="font-size: 18px; text-align: center; color: #333; padding: 20px; background-color: #f8f8f8; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
