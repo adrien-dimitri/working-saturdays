@@ -1,28 +1,59 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Quicksand', 'Comic Sans MS', Arial, sans-serif; /* A cute and modern font */
+    background-color: #ffecf2; /* Light pink background */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    margin: 0; /* Remove default margin */
+}
+
+h1 {
+    color: #732c5d; /* Darker pink for the heading */
 }
 
 #form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
+    background-color: #ffffff; /* White background */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     margin-bottom: 20px;
-    gap: 20px; /* Add this line */
+    gap: 20px;
+}
+
+label, button {
+    color: #732c5d; /* Dark pink color for labels and buttons */
+}
+
+input, button {
+    border: 2px solid #732c5d; /* Dark pink border for input and button */
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
 }
 
 #result {
-    background-color: #fff;
+    background-color: #ffffff; /* White background */
     padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    color: #732c5d; /* Dark pink color for the result text */
+}
+
+/* Optional: Add Molang Piu Piu images or emojis */
+#piupiu-image {
+    width: 100px;
+    height: auto;
+}
+
+/* Optional: Add a cute Molang Piu Piu background image */
+body {
+    background-image: url('https://preview.redd.it/e29sbn0f7xwb1.jpg?width=4000&format=pjpg&auto=webp&s=315f645604e478f86274d6d24a0b32c21f1525b1');
+    background-size: cover;
+    background-position: center; /* Adjusted this line */
+    background-repeat: no-repeat;
 }
