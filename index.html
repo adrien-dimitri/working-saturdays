@@ -14,18 +14,8 @@
             <label for="startdate">Enter any working Saturday: </label>
             <input type="date" id="startdate">
         </div>
-        <div>
-            <label for="weekrange">For how many weeks: </label>
-            <input type="number" id="weekrange">
-        </div>
-        <button onclick="showResult()">Show</button>
     </div>
 
-    <div id="result" style="font-size: 18px; text-align: center; color: #333; padding: 20px; background-color: #f8f8f8; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <span style="font-size: 24px; color: #3498db;">Hold on! 🐥</span><br>
-        I'm finding those Saturdays for you... 🐇
-    </div>
-    
     <div id="calendar-container">
         <div id="month-selector">
             <button onclick="changeMonth(-1)">Previous Month</button>
@@ -88,6 +78,11 @@
         let currentYear = today.getFullYear();
 
         function generateCalendar() {
+            const startDateInput = document.getElementById("startdate");
+            const selectedDate = new Date(startDateInput.value);
+            
+            workingSaturdays = getWorkingSaturdaysForMonth(currentMonth, currentYear, selectedDate);
+            
             const calendarContainer = document.getElementById('calendar');
             calendarContainer.innerHTML = '';
 
@@ -106,12 +101,9 @@
             // Generate days for the month
             const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
             const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
-            // console.log(daysOfWeek[firstDayOfMonth.getDay()]);
-            // console.log(lastDayOfMonth);
             const daysInMonth = lastDayOfMonth.getDate();
 
             emptyDays = daysOfWeek.indexOf(daysOfWeek[firstDayOfMonth.getDay()]) - 1;
-            console.log(emptyDays);
             for (let i = 0; i < emptyDays; i++) {
                 const cell = document.createElement('div');
                 cell.classList.add('day');
@@ -130,9 +122,11 @@
                 cell.textContent = i;
                 
                 // 0 - Monday, 6 - Sunday
-                if (dayOfWeek === 6) {
-                    // Highlight every second Friday as a working day
-                    cell.classList.add('working-day');
+                for (let j = 0; j < workingSaturdays.length; j++) {
+                    if (i === workingSaturdays[j].getDate()) {
+                        cell.style.backgroundColor = "#3498db";
+                        cell.style.color = "#fff";
+                    }
                 }
 
                 cell.addEventListener('click', () => alert(`Clicked on ${date.toDateString()}`));
@@ -151,6 +145,33 @@
                 currentYear--;
             }
             generateCalendar();
+        }
+
+        function getWorkingSaturdaysForMonth(currentMonth, currentYear, initialWorkingSaturday) {
+            workingSaturdays = [];
+            let initialWorkingSaturdayDate = new Date(initialWorkingSaturday);
+            let initialWorkingSaturdayMonth = initialWorkingSaturdayDate.getMonth();
+            let initialWorkingSaturdayYear = initialWorkingSaturdayDate.getFullYear();
+
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+            const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
+            const daysInMonth = lastDayOfMonth.getDate();
+
+            let i = 0;
+
+            while (currentMonth !== initialWorkingSaturday.getMonth()) {
+                // add 14 days to the initial working Saturday date until the month matches
+                //initialWorkingSaturday = new Date();
+                var numberOfDaysToAdd = 14;
+                var result = initialWorkingSaturday.setDate(initialWorkingSaturday.getDate() + numberOfDaysToAdd);
+                var initialWorkingSaturday = new Date(result);
+            }
+            if (initialWorkingSaturday.getMonth() === currentMonth && initialWorkingSaturday.getFullYear() === currentYear) {
+                for (let i = initialWorkingSaturday.getDate(); i <= daysInMonth; i += 14) {
+                    workingSaturdays.push(new Date(currentYear, currentMonth, i));
+                }
+            }
+            return workingSaturdays;
         }
 
         // Initial calendar generation
