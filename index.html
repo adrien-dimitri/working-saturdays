@@ -14,7 +14,10 @@
             <label for="startdate">Enter any working Saturday: </label>
             <input type="date" id="startdate">
         </div>
+        <button onclick="changeMonth(0)">Show</button>
     </div>
+
+    
 
     <div id="calendar-container">
         <div id="month-selector">
@@ -25,157 +28,6 @@
         <div id="calendar"></div>
     </div>
     
-    <script>
-        function showResult() {
-            const startDateInput = document.getElementById("startdate");
-            const selectedDate = new Date(startDateInput.value);
-            const weekrange = parseInt(document.getElementById("weekrange").value, 10); // Parse the value as an integer            
-            
-            // Check if the entered value is non-negative
-            if (weekrange < 0) {
-                alert("You want to go back in time? 😂");
-                return; // Stop the function if the input is invalid
-            }
-            if (weekrange === 0) {
-                alert("Hmmm... Only you can know if you work this week or not 🙃");
-                return; // Stop the function if the input is invalid
-            }
-
-            const working = [];
-
-            for (let i = 0; i < weekrange; i = i + 2) {
-                const startdate = new Date(selectedDate);
-                startdate.setDate(selectedDate.getDate() + (7 * i));
-                working.push(new Date(startdate).toDateString());
-            }
-
-            // Display the result
-            const resultContainer = document.getElementById("result");
-            resultContainer.innerHTML = ""; // Clear previous results
-
-            if (working.length > 0) {
-                const resultHeader = document.createElement("span");
-                resultHeader.style.fontSize = "24px";
-                resultHeader.style.color = "#3498db";
-                resultHeader.textContent = "Future working Saturdays:";
-                resultContainer.appendChild(resultHeader);
-
-                for (let j = 0; j < working.length; j++) {
-                    const br = document.createElement("br");
-                    const node = document.createTextNode(working[j]);
-                    resultContainer.appendChild(br);
-                    resultContainer.appendChild(node);
-                }
-            } else {
-                resultContainer.textContent = "No future working Saturdays found.";
-            }
-        }
-
-        const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-        const today = new Date();
-
-        let currentMonth = today.getMonth();
-        let currentYear = today.getFullYear();
-
-        function generateCalendar() {
-            const startDateInput = document.getElementById("startdate");
-            const selectedDate = new Date(startDateInput.value);
-            
-            workingSaturdays = getWorkingSaturdaysForMonth(currentMonth, currentYear, selectedDate);
-            
-            const calendarContainer = document.getElementById('calendar');
-            calendarContainer.innerHTML = '';
-
-            // Set the current month in the header
-            document.getElementById('current-month').textContent = `${new Date(currentYear, currentMonth).toLocaleString('en-GB', { month: 'long', year: 'numeric' })}`;
-
-            // Generate header row with days of the week
-            const headerRow = document.createElement('div');
-            headerRow.classList.add('day');
-            daysOfWeek.forEach(day => {
-                const cell = document.createElement('div');
-                cell.textContent = day;
-                calendarContainer.appendChild(cell);
-            });
-
-            // Generate days for the month
-            const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-            const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
-            const daysInMonth = lastDayOfMonth.getDate();
-
-            emptyDays = daysOfWeek.indexOf(daysOfWeek[firstDayOfMonth.getDay()]) - 1;
-            for (let i = 0; i < emptyDays; i++) {
-                const cell = document.createElement('div');
-                cell.classList.add('day');
-                cell.textContent = "";
-
-                cell.addEventListener('click', () => alert(`Clicked on ${date.toDateString()}`));
-
-                calendarContainer.appendChild(cell);
-            }
-            for (let i = 1; i <= daysInMonth; i++) {
-                const date = new Date(currentYear, currentMonth, i);
-                const dayOfWeek = date.getDay();
-
-                const cell = document.createElement('div');
-                cell.classList.add('day');
-                cell.textContent = i;
-                
-                // 0 - Monday, 6 - Sunday
-                for (let j = 0; j < workingSaturdays.length; j++) {
-                    if (i === workingSaturdays[j].getDate()) {
-                        cell.style.backgroundColor = "#3498db";
-                        cell.style.color = "#fff";
-                    }
-                }
-
-                cell.addEventListener('click', () => alert(`Clicked on ${date.toDateString()}`));
-
-                calendarContainer.appendChild(cell);
-            }
-        }
-
-        function changeMonth(delta) {
-            currentMonth += delta;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            } else if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
-            generateCalendar();
-        }
-
-        function getWorkingSaturdaysForMonth(currentMonth, currentYear, initialWorkingSaturday) {
-            workingSaturdays = [];
-            let initialWorkingSaturdayDate = new Date(initialWorkingSaturday);
-            let initialWorkingSaturdayMonth = initialWorkingSaturdayDate.getMonth();
-            let initialWorkingSaturdayYear = initialWorkingSaturdayDate.getFullYear();
-
-            const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-            const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
-            const daysInMonth = lastDayOfMonth.getDate();
-
-            let i = 0;
-
-            while (currentMonth !== initialWorkingSaturday.getMonth()) {
-                // add 14 days to the initial working Saturday date until the month matches
-                //initialWorkingSaturday = new Date();
-                var numberOfDaysToAdd = 14;
-                var result = initialWorkingSaturday.setDate(initialWorkingSaturday.getDate() + numberOfDaysToAdd);
-                var initialWorkingSaturday = new Date(result);
-            }
-            if (initialWorkingSaturday.getMonth() === currentMonth && initialWorkingSaturday.getFullYear() === currentYear) {
-                for (let i = initialWorkingSaturday.getDate(); i <= daysInMonth; i += 14) {
-                    workingSaturdays.push(new Date(currentYear, currentMonth, i));
-                }
-            }
-            return workingSaturdays;
-        }
-
-        // Initial calendar generation
-        generateCalendar();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
