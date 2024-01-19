@@ -25,34 +25,39 @@
     
     
     <script>
-        function showResult(elem) {
-            document.getElementById("result").innerHTML = "";
-            const year = elem.getFullYear()
-            const month = elem.getMonth() 
-            const day = elem.getDate()
-            const weekrange = document.getElementById("weekrange").value
+        function showResult() {
+            const startDateInput = document.getElementById("startdate");
+            const selectedDate = new Date(startDateInput.value);
+            const weekrange = document.getElementById("weekrange").value;
             
-            const fixed = new Date(year, month, day)
-            
-            const working = []
+            const working = [];
 
-            for (let i = 0; i < weekrange; i = i + 2) {
-                const startdate = new Date(fixed)
-                startdate.setDate(elem.getDate() + (7 * i))
-                working.push(new Date(startdate).toDateString())
-                
+            for (let i = 1; i < weekrange; i = i + 2) {
+                const startdate = new Date(selectedDate);
+                startdate.setDate(selectedDate.getDate() + (7 * i));
+                working.push(new Date(startdate).toDateString());
             }
 
-            j = 0
-            while (j < working.length) {
-                const br = document.createElement("br");
-                const node = document.createTextNode(working[j]);
-                document.getElementById("result").appendChild(node)
-                document.getElementById("result").appendChild(br)
+            // Display the result
+            const resultContainer = document.getElementById("result");
+            resultContainer.innerHTML = ""; // Clear previous results
 
-                j++;
+            if (working.length > 0) {
+                const resultHeader = document.createElement("span");
+                resultHeader.style.fontSize = "24px";
+                resultHeader.style.color = "#3498db";
+                resultHeader.textContent = "Future working Saturdays:";
+                resultContainer.appendChild(resultHeader);
+
+                for (let j = 0; j < working.length; j++) {
+                    const br = document.createElement("br");
+                    const node = document.createTextNode(working[j]);
+                    resultContainer.appendChild(br);
+                    resultContainer.appendChild(node);
+                }
+            } else {
+                resultContainer.textContent = "No future working Saturdays found.";
             }
-            
         }
     </script>
 </body>
