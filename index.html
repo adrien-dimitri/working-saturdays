@@ -45,7 +45,7 @@
 
             const working = [];
 
-            for (let i = 2; i < weekrange; i = i + 2) {
+            for (let i = 0; i < weekrange; i = i + 2) {
                 const startdate = new Date(selectedDate);
                 startdate.setDate(selectedDate.getDate() + (7 * i));
                 working.push(new Date(startdate).toDateString());
