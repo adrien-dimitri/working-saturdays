@@ -1,23 +1,28 @@
 body {
-    font-family: 'Quicksand', 'Comic Sans MS', Arial, sans-serif; /* A cute and modern font */
-    background-color: #ffecf2; /* Light pink background */
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+
+    font-family: 'Quicksand', 'Comic Sans MS', Arial, sans-serif;
+    background-color: rgba(197,229,250,255);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    margin: 0; /* Remove default margin */
+    margin: 0; 
 }
 
 h1 {
-    color: #732c5d; /* Darker pink for the heading */
+    color: #732c5d; 
 }
 
 #form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #ffffff; /* White background */
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
@@ -26,40 +31,37 @@ h1 {
 }
 
 label, button {
-    color: #732c5d; /* Dark pink color for labels and buttons */
+    color: #732c5d;
 }
 
 input, button {
-    border: 2px solid #732c5d; /* Dark pink border for input and button */
+    border: 2px solid #732c5d; 
     border-radius: 4px;
     padding: 10px;
     font-size: 14px;
 }
 
 #result {
-    background-color: #ffffff; /* White background */
+    background-color: #ffffff;
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-    color: #732c5d; /* Dark pink color for the result text */
+    color: #732c5d; 
 }
 
-/* Optional: Add Molang Piu Piu images or emojis */
 #piupiu-image {
     width: 100px;
     height: auto;
 }
 
-/* Optional: Add a cute Molang Piu Piu background image */
-body {
-    background-image: url('https://preview.redd.it/e29sbn0f7xwb1.jpg?width=4000&format=pjpg&auto=webp&s=315f645604e478f86274d6d24a0b32c21f1525b1');
-    background-size: cover;
-    background-position: center; /* Adjusted this line */
-    background-repeat: no-repeat;
-}
 
 #calendar-container {
     text-align: center;
+    background-color: #fff; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
 }
 
 #month-selector {
@@ -80,21 +82,18 @@ button:hover {
     background-color: #571f40;
 }
 
-
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
+    background-color: rgba(197,229,250,255);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
 }
 
 .day {
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.working-day {
-    background-color: #ff0000;
-    color: #fff;
-    font-weight: bold;
 }
