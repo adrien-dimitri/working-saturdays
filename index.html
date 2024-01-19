@@ -9,12 +9,14 @@
 <body>
     <h1>Working Saturdays Calculator</h1>
     <div id="form-container">
-        <label for="startdate">Enter any working Saturday: </label>
-        <input type="date" id="startdate">
-        <br>
-        <label for="weekrange">For how many weeks: </label>
-        <input type="number" id="weekrange">
-        <br>
+        <div>
+            <label for="startdate">Enter any working Saturday: </label>
+            <input type="date" id="startdate">
+        </div>
+        <div>
+            <label for="weekrange">For how many weeks: </label>
+            <input type="number" id="weekrange">
+        </div>
         <button onclick="showResult()">Show</button>
     </div>
 
@@ -28,11 +30,21 @@
         function showResult() {
             const startDateInput = document.getElementById("startdate");
             const selectedDate = new Date(startDateInput.value);
-            const weekrange = document.getElementById("weekrange").value;
+            const weekrange = parseInt(document.getElementById("weekrange").value, 10); // Parse the value as an integer            
             
+            // Check if the entered value is non-negative
+            if (weekrange < 0) {
+                alert("You want to go back in time? 😂");
+                return; // Stop the function if the input is invalid
+            }
+            if (weekrange === 0) {
+                alert("Hmmm... Only you can know if you work this week or not 🙃");
+                return; // Stop the function if the input is invalid
+            }
+
             const working = [];
 
-            for (let i = 1; i < weekrange; i = i + 2) {
+            for (let i = 2; i < weekrange; i = i + 2) {
                 const startdate = new Date(selectedDate);
                 startdate.setDate(selectedDate.getDate() + (7 * i));
                 working.push(new Date(startdate).toDateString());
