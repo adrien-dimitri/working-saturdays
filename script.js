@@ -33,6 +33,9 @@ function generateCalendar() {
     const daysInMonth = lastDayOfMonth.getDate();
 
     emptyDays = daysOfWeek.indexOf(daysOfWeek[firstDayOfMonth.getDay()]) - 1;
+    if (emptyDays === -1) {
+        emptyDays = 6;
+    }
     for (let i = 0; i < emptyDays; i++) {
         const cell = document.createElement('div');
         cell.classList.add('day');
