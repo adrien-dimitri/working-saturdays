@@ -14,12 +14,12 @@
             <label for="startdate">Enter any working Saturday: </label>
             <input type="date" id="startdate">
         </div>
-        <button onclick="changeMonth(0)">Show</button>
+        <button onclick="generateCalendar()">Show</button>
     </div>
 
     
 
-    <div id="calendar-container">
+    <div id="calendar-container" style="display: none;">
         <div id="month-selector">
             <button onclick="changeMonth(-1)">◄</button>
             <span id="current-month"></span>

@@ -10,6 +10,7 @@ function generateCalendar() {
     const selectedDate = new Date(startDateInput.value);
     if (!isNaN(selectedDate)) {
         workingSaturdays = getWorkingSaturdaysForMonth(currentMonth, currentYear, selectedDate);
+        document.getElementById('calendar-container').style.display = "block";
     }
     
     const calendarContainer = document.getElementById('calendar');
